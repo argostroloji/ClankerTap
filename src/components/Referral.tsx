@@ -70,28 +70,32 @@ export const Referral: React.FC<ReferralProps> = ({ isOpen, onClose, userId }) =
     console.log('Generated Invite Link:', inviteLink);
 
     return (
-        <div className="fixed bottom-0 left-0 right-0 bg-panel-bg rounded-t-2xl z-50 p-6 border-t border-electric-blue shadow-[0_-5px_20px_rgba(0,0,0,0.8)] animate-slide-up">
-            <div className="flex justify-between items-start mb-4">
+        <div className="fixed bottom-0 left-0 right-0 bg-panel-bg rounded-t-3xl z-50 p-6 border-t border-primary-green shadow-[0_-5px_30px_rgba(0,255,65,0.2)] animate-slide-up">
+            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary-green to-transparent opacity-50"></div>
+
+            <div className="flex justify-between items-start mb-6">
                 <div>
-                    <h3 className="text-xl font-bold text-white">INVITE UNIT</h3>
-                    <p className="text-xs text-gray-400">Recruit friends, earn +50,000 Snips each.</p>
+                    <h3 className="text-2xl font-black italic tracking-tighter text-white" style={{ fontFamily: '"Rajdhani", sans-serif' }}>
+                        INVITE UNIT
+                    </h3>
+                    <p className="text-xs text-gray-400 font-medium">Recruit friends, earn <span className="text-primary-green">+50,000 Snips</span> each.</p>
                 </div>
-                <button onClick={onClose} className="text-gray-400 font-bold p-1">✕</button>
+                <button onClick={onClose} className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-800 text-gray-400 hover:bg-gray-700 hover:text-white transition-colors">✕</button>
             </div>
 
-            <div className="bg-deep-dark p-4 rounded-lg border border-gray-700 mb-4 flex justify-between items-center">
-                <span className="text-gray-400 text-sm">Referrals (Recruits):</span>
-                <span className="text-2xl font-bold text-electric-blue">{referralCount}</span>
+            <div className="bg-gray-900/50 p-4 rounded-2xl border border-gray-800 mb-6 flex justify-between items-center backdrop-blur-sm">
+                <span className="text-gray-400 text-sm font-bold uppercase tracking-wider">RECRUITS</span>
+                <span className="text-3xl font-black text-primary-green drop-shadow-md font-sans">{referralCount}</span>
             </div>
 
-            <div className="bg-black/50 p-4 rounded-lg flex items-center justify-between mb-4 border border-gray-700">
-                <code className="text-xs text-neon-orange truncate flex-1 mr-2">
+            <div className="bg-black/30 p-4 rounded-xl flex items-center justify-between mb-6 border border-gray-800 hover:border-gray-700 transition-colors">
+                <code className="text-xs text-emerald-400 truncate flex-1 mr-4 font-mono select-all">
                     {userId ? inviteLink : 'Generating Link...'}
                 </code>
                 <button
                     onClick={handleCopy}
                     disabled={!userId}
-                    className={`text-white text-xs px-3 py-2 rounded transition-colors ${!userId ? 'bg-gray-800 cursor-wait' : 'bg-gray-700 hover:bg-gray-600'}`}
+                    className={`text-black text-xs font-bold px-4 py-2 rounded-lg transition-all transform active:scale-95 ${!userId ? 'bg-gray-700 cursor-wait' : 'bg-white hover:bg-gray-200'}`}
                 >
                     {copied ? 'COPIED!' : 'COPY'}
                 </button>
@@ -99,9 +103,9 @@ export const Referral: React.FC<ReferralProps> = ({ isOpen, onClose, userId }) =
 
             <button
                 onClick={handleInvite}
-                className="w-full bg-electric-blue text-black font-bold py-3 rounded-lg shadow-[0_0_15px_rgba(0,255,255,0.5)] active:scale-95 transition-transform"
+                className="w-full bg-gradient-to-r from-primary-green to-emerald-600 text-black font-black text-lg py-4 rounded-2xl shadow-[0_0_20px_rgba(46,204,113,0.4)] active:scale-95 transition-all hover:brightness-110 flex items-center justify-center gap-2 uppercase tracking-wide"
             >
-                SEND INVITE SIGNAL 📡
+                SEND INVITE SIGNAL <span className="text-xl">📡</span>
             </button>
         </div>
     );

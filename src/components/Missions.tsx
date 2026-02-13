@@ -47,47 +47,61 @@ export const Missions: React.FC<MissionsProps> = ({ isOpen, onClose, onReward })
     };
 
     return (
-        <div className="fixed inset-0 bg-black/80 flex items-end justify-center z-50 animate-fade-in" onClick={onClose}>
-            <div className="bg-panel-bg w-full max-w-md h-[70vh] rounded-t-2xl p-6 border-t border-neon-orange shadow-[0_-5px_20px_rgba(255,95,31,0.3)] flex flex-col" onClick={e => e.stopPropagation()}>
-                <div className="flex justify-between items-center mb-6">
-                    <h2 className="text-2xl font-bold text-white gltich" data-text="MISSIONS">MISSIONS</h2>
-                    <button onClick={onClose} className="text-gray-400 hover:text-white text-xl">✕</button>
+        <div className="fixed inset-0 bg-black/90 backdrop-blur-sm flex items-end justify-center z-50 animate-fade-in" onClick={onClose}>
+            <div className="bg-panel-bg w-full max-w-md h-[75vh] rounded-t-3xl p-6 border-t border-primary-green shadow-[0_-5px_30px_rgba(0,255,65,0.2)] flex flex-col relative overflow-hidden" onClick={e => e.stopPropagation()}>
+                {/* Decorative background element */}
+                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary-green to-transparent opacity-50"></div>
+
+                <div className="flex justify-between items-center mb-8 relative z-10">
+                    <h2 className="text-3xl font-black italic tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-white via-primary-green to-emerald-500 drop-shadow-lg" style={{ fontFamily: '"Rajdhani", sans-serif' }}>
+                        MISSIONS
+                    </h2>
+                    <button onClick={onClose} className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-800 text-gray-400 hover:bg-gray-700 hover:text-white transition-colors">✕</button>
                 </div>
 
-                <div className="space-y-4 overflow-y-auto">
+                <div className="space-y-4 overflow-y-auto pb-8 relative z-10 custom-scrollbar">
                     {MISSIONS.map((mission) => {
                         const isCompleted = completedMissions.includes(mission.id);
                         const isClaiming = claiming === mission.id;
 
                         return (
-                            <div key={mission.id} className="bg-deep-dark p-4 rounded-xl border border-gray-800 flex items-center justify-between">
-                                <div className="flex items-center gap-3">
-                                    <span className="text-3xl">{mission.icon}</span>
-                                    <div>
-                                        <h3 className="font-bold text-white">{mission.title}</h3>
-                                        <p className="text-xs text-electric-blue">+{mission.reward.toLocaleString()} 💰</p>
+                            <div key={mission.id} className={`group relative p-4 rounded-2xl border transition-all duration-300 ${isCompleted ? 'bg-gray-900/40 border-gray-800 opacity-70' : 'bg-gray-900/80 border-gray-700 hover:border-primary-green/50 hover:bg-gray-800'}`}>
+                                <div className="flex items-center justify-between gap-4">
+                                    <div className="flex items-center gap-4">
+                                        <div className={`w-12 h-12 rounded-xl flex items-center justify-center text-2xl bg-gray-800 ${isCompleted ? 'grayscale' : 'group-hover:scale-110 transition-transform'}`}>
+                                            {mission.icon}
+                                        </div>
+                                        <div>
+                                            <h3 className={`font-bold text-lg leading-tight ${isCompleted ? 'text-gray-500' : 'text-white'}`}>{mission.title}</h3>
+                                            <p className="text-sm font-mono text-primary-green flex items-center gap-1">
+                                                +{mission.reward.toLocaleString()} <span className="text-emerald-400">💰</span>
+                                            </p>
+                                        </div>
                                     </div>
+
+                                    <button
+                                        className={`px-5 py-2 rounded-xl font-bold text-sm min-w-[90px] transition-all transform active:scale-95 shadow-lg
+                                            ${isCompleted
+                                                ? 'bg-transparent border border-gray-700 text-gray-500 cursor-default'
+                                                : isClaiming
+                                                    ? 'bg-yellow-500/20 text-yellow-500 border border-yellow-500/50 cursor-wait animate-pulse'
+                                                    : 'bg-gradient-to-r from-primary-green to-emerald-600 text-black border border-transparent hover:brightness-110 hover:shadow-primary-green/20'}`}
+                                        disabled={isCompleted || isClaiming}
+                                        onClick={() => handleMissionClick(mission)}
+                                    >
+                                        {isCompleted ? 'DONE' : isClaiming ? 'WAIT...' : 'START'}
+                                    </button>
                                 </div>
-                                <button
-                                    className={`px-4 py-2 rounded-lg font-bold text-sm min-w-[80px] transition-all
-                                        ${isCompleted
-                                            ? 'bg-green-900/50 text-green-400 cursor-default'
-                                            : isClaiming
-                                                ? 'bg-yellow-600/50 text-yellow-200 cursor-wait'
-                                                : 'bg-neon-orange text-black hover:bg-orange-400'}`}
-                                    disabled={isCompleted || isClaiming}
-                                    onClick={() => handleMissionClick(mission)}
-                                >
-                                    {isCompleted ? 'DONE' : isClaiming ? 'Wait 5s...' : 'GO'}
-                                </button>
                             </div>
                         );
                     })}
                 </div>
 
-                <p className="text-center text-gray-500 text-xs mt-6">
-                    New missions appear daily at 00:00 UTC.
-                </p>
+                <div className="mt-auto pt-6 text-center">
+                    <p className="text-gray-600 text-[10px] uppercase tracking-widest font-bold">
+                        Resets Daily at 00:00 UTC
+                    </p>
+                </div>
             </div>
         </div>
     );

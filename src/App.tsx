@@ -142,16 +142,16 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-deep-dark text-neon-orange font-mono p-4 flex flex-col overflow-hidden relative">
+    <div className="min-h-screen bg-deep-dark text-white font-sans p-4 flex flex-col overflow-hidden relative selection:bg-neon-green selection:text-black">
       {/* Header / HUD */}
       <div className="flex justify-between items-center w-full max-w-md mx-auto z-10">
         <div className="flex flex-col">
-          <span className="text-xs text-gray-500">OPERATOR</span>
-          <span className="font-bold text-white max-w-[150px] truncate">{dbUser?.username || 'Initializing...'}</span>
+          <span className="text-[10px] font-bold tracking-[0.2em] text-gray-500 uppercase mb-1">Operator</span>
+          <span className="font-bold text-xl text-white tracking-wide truncate drop-shadow-md">{dbUser?.username || 'Initializing...'}</span>
         </div>
         <div className="flex flex-col items-end">
-          <span className="text-xs text-gray-500">TOTAL CASH</span>
-          <span className="text-3xl font-bold text-electric-blue drop-shadow-[0_0_10px_rgba(0,255,255,0.7)]">
+          <span className="text-[10px] font-bold tracking-[0.2em] text-gray-500 uppercase mb-1">Total Cash</span>
+          <span className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-br from-white via-neon-green to-emerald-600 drop-shadow-[0_0_10px_rgba(46,204,113,0.4)] font-sans">
             {Math.floor(snips).toLocaleString()} 💰
           </span>
         </div>
@@ -168,32 +168,32 @@ function App() {
       </div>
 
       {/* Footer / Menu */}
-      <div className="w-full max-w-md mx-auto mt-4 p-4 bg-panel-bg rounded-t-xl border-t border-gray-800 z-10 relative">
-        <div className="flex justify-around text-2xl">
+      <div className="w-full max-w-md mx-auto mt-4 p-4 bg-panel-bg rounded-t-3xl border-t border-gray-800 z-10 relative shadow-[0_-5px_20px_rgba(0,0,0,0.5)]">
+        <div className="flex justify-around text-2xl items-center">
           <button
-            className="p-2 hover:text-electric-blue transition-colors"
+            className="p-3 hover:text-primary-green hover:bg-gray-800/50 rounded-xl transition-all active:scale-95"
             onClick={() => setIsMissionsOpen(true)}
           >
             📜
           </button>
           <button
-            className="p-2 hover:text-electric-blue transition-colors relative"
+            className="p-3 hover:text-primary-green hover:bg-gray-800/50 rounded-xl transition-all active:scale-95 relative group"
             onClick={() => setIsUpgradeDockOpen(true)}
           >
-            ⚡
-            <span className="absolute -top-1 -right-1 flex h-3 w-3">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-3 w-3 bg-orange-500"></span>
+            <span className="group-hover:text-primary-green transition-colors">⚡</span>
+            <span className="absolute top-2 right-2 flex h-3 w-3">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-green opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
             </span>
           </button>
           <button
-            className="p-2 hover:text-electric-blue transition-colors"
+            className="p-3 hover:text-primary-green hover:bg-gray-800/50 rounded-xl transition-all active:scale-95"
             onClick={() => setIsReferralOpen(true)}
           >
             👯
           </button>
           <button
-            className="p-2 hover:text-electric-blue transition-colors"
+            className="p-3 hover:text-primary-green hover:bg-gray-800/50 rounded-xl transition-all active:scale-95"
             onClick={() => setIsLeaderboardOpen(true)}
           >
             🏆

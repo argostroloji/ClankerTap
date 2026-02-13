@@ -8,12 +8,14 @@ export default {
     theme: {
         extend: {
             colors: {
-                'neon-orange': '#ff5f1f',
-                'electric-blue': '#00ffff',
-                'deep-dark': '#050510',
-                'panel-bg': '#10101a',
+                'primary-green': '#00ff41',
+                'secondary-green': '#008F11',
+                'neon-green': '#2ecc71',
+                'deep-dark': '#050a05',
+                'panel-bg': '#0a140a',
             },
             fontFamily: {
+                sans: ['"Rajdhani"', 'sans-serif'],
                 mono: ['"Courier New"', 'Courier', 'monospace'],
             },
             animation: {

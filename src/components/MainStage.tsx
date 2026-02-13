@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import bagImg from '../assets/bag.svg';
+import bagImg from '../assets/bag.jpg';
 
 interface MainStageProps {
     onTap: () => boolean;
@@ -63,7 +63,7 @@ export const MainStage: React.FC<MainStageProps> = ({ onTap, tapValue }) => {
                 <img
                     src={bagImg}
                     alt="Tap Bag"
-                    className="w-full h-full object-contain filter drop-shadow-[0_0_20px_rgba(46,204,113,0.6)]"
+                    className="w-full h-full object-cover rounded-full filter drop-shadow-[0_0_20px_rgba(46,204,113,0.6)]"
                     draggable="false"
                 />
 
