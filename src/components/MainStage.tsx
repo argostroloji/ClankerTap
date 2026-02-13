@@ -1,5 +1,6 @@
 import React, { useState, useCallback } from 'react';
-import bagImg from '../assets/bag.jpg';
+import { playSound } from '../lib/audio';
+import characterImg from '../assets/character.png';
 
 interface MainStageProps {
     onTap: () => boolean;
@@ -16,12 +17,20 @@ interface Particle {
 export const MainStage: React.FC<MainStageProps> = ({ onTap, tapValue }) => {
     const [particles, setParticles] = useState<Particle[]>([]);
     const [isAnimating, setIsAnimating] = useState(false);
+    const [isShaking, setIsShaking] = useState(false);
 
     const handleClick = useCallback((e: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>) => {
         // Prevent default behavior to avoid double-firing on some touch devices
         // e.preventDefault(); 
 
         if (onTap()) {
+            // Trigger slap sound
+            playSound('slap');
+
+            // Trigger shake animation
+            setIsShaking(true);
+            setTimeout(() => setIsShaking(false), 200);
+
             // Create particle effect
             const rect = e.currentTarget.getBoundingClientRect();
             const clientX = 'touches' in e ? e.touches[0].clientX : (e as React.MouseEvent).clientX;
@@ -44,7 +53,7 @@ export const MainStage: React.FC<MainStageProps> = ({ onTap, tapValue }) => {
                 setParticles((prev) => prev.filter((p) => p.id !== newParticle.id));
             }, 1000);
 
-            // Animation trigger
+            // Scale Animation trigger
             setIsAnimating(true);
             setTimeout(() => setIsAnimating(false), 100);
         }
@@ -56,13 +65,15 @@ export const MainStage: React.FC<MainStageProps> = ({ onTap, tapValue }) => {
             onClick={handleClick}
         // onTouchStart={handleClick} // React handles touch/click unification well usually, but check if needed
         >
-            {/* Bag Logo */}
+            {/* Character Logo */}
             <div
-                className={`w-full h-full flex items-center justify-center transition-transform duration-100 ${isAnimating ? 'scale-95' : 'scale-100'}`}
+                className={`w-full h-full flex items-center justify-center transition-transform duration-100 
+                    ${isAnimating ? 'scale-95' : 'scale-100'} 
+                    ${isShaking ? 'animate-shake' : ''}`}
             >
                 <img
-                    src={bagImg}
-                    alt="Tap Bag"
+                    src={characterImg}
+                    alt="Main Character"
                     className="w-full h-full object-cover rounded-full filter drop-shadow-[0_0_20px_rgba(46,204,113,0.6)]"
                     draggable="false"
                 />

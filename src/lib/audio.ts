@@ -2,7 +2,7 @@
 // Simple Web Audio API synth
 const audioCtx = new (window.AudioContext || (window as any).webkitAudioContext)();
 
-type SoundType = 'click' | 'upgrade' | 'error' | 'bgm_start';
+type SoundType = 'click' | 'upgrade' | 'error' | 'bgm_start' | 'slap';
 
 export const playSound = (type: SoundType) => {
     if (audioCtx.state === 'suspended') {
@@ -66,6 +66,30 @@ export const playSound = (type: SoundType) => {
 
         case 'bgm_start':
             // Just a placeholder/drone
+            break;
+        case 'slap':
+            // Sharp slap sound: rapid decay noise/sawtooth
+            osc.type = 'sawtooth';
+            osc.frequency.setValueAtTime(800, now);
+            osc.frequency.exponentialRampToValueAtTime(100, now + 0.1);
+            gainNode.gain.setValueAtTime(0.3, now);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.1);
+            osc.start(now);
+            osc.stop(now + 0.1);
+
+            // Add some noise for texture (simulated with random modulation if possible, but simple osc for now)
+            // A second osc for "meatier" sound
+            const osc3 = audioCtx.createOscillator();
+            const gain3 = audioCtx.createGain();
+            osc3.connect(gain3);
+            gain3.connect(audioCtx.destination);
+            osc3.type = 'square';
+            osc3.frequency.setValueAtTime(200, now);
+            osc3.frequency.exponentialRampToValueAtTime(50, now + 0.15);
+            gain3.gain.setValueAtTime(0.2, now);
+            gain3.gain.exponentialRampToValueAtTime(0.01, now + 0.15);
+            osc3.start(now);
+            osc3.stop(now + 0.15);
             break;
     }
 };
