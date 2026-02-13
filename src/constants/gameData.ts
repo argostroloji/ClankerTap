@@ -61,5 +61,82 @@ export const MISSIONS: Mission[] = [
         reward: 50000,
         link: 'https://x.com/BNNBags',
         icon: '🐦'
+    },
+    {
+        id: 'twitter_follow_alaadotsol',
+        title: 'Follow alaadotsol on X',
+        reward: 50000,
+        link: 'https://x.com/alaadotsol',
+        icon: '🐦'
+    },
+    {
+        id: 'twitter_follow_sambags12',
+        title: 'Follow Sambags12 on X',
+        reward: 50000,
+        link: 'https://x.com/Sambags12',
+        icon: '🐦'
+    },
+    {
+        id: 'twitter_follow_ramyobags',
+        title: 'Follow ramyobags on X',
+        reward: 50000,
+        link: 'https://x.com/ramyobags',
+        icon: '🐦'
+    },
+    {
+        id: 'twitter_follow_carlobags',
+        title: 'Follow carlobags on X',
+        reward: 50000,
+        link: 'https://x.com/carlobags',
+        icon: '🐦'
+    },
+    {
+        id: 'twitter_follow_launchonbags',
+        title: 'Follow LaunchOnBags on X',
+        reward: 50000,
+        link: 'https://x.com/LaunchOnBags',
+        icon: '🐦'
+    },
+    {
+        id: 'twitter_follow_stuubags',
+        title: 'Follow StuuBags on X',
+        reward: 50000,
+        link: 'https://x.com/StuuBags',
+        icon: '🐦'
+    },
+    {
+        id: 'twitter_follow_sincarabags',
+        title: 'Follow sincara_bags on X',
+        reward: 50000,
+        link: 'https://x.com/sincara_bags',
+        icon: '🐦'
+    },
+    {
+        id: 'twitter_follow_bagsfund',
+        title: 'Follow BagsFund on X',
+        reward: 50000,
+        link: 'https://x.com/BagsFund',
+        icon: '🐦'
+    },
+    {
+        id: 'twitter_follow_bagsearnings',
+        title: 'Follow BagsEarnings on X',
+        reward: 50000,
+        link: 'https://x.com/BagsEarnings',
+        icon: '🐦'
+    },
+    {
+        id: 'twitter_follow_bagshackathon',
+        title: 'Follow BagsHackathon on X',
+        reward: 50000,
+        link: 'https://x.com/BagsHackathon',
+        icon: '🐦'
+    },
+    {
+        id: 'twitter_follow_argostroloji',
+        title: 'Follow Argostroloji on X',
+        reward: 50000,
+        link: 'https://x.com/Argostroloji',
+        icon: '🐦'
     }
 ];
