@@ -1,0 +1,140 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  background-color: #050510;
+  color: #e0e0e0;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+#root {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #10101a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #ff5f1f;
+}
+
+.glitch {
+  position: relative;
+}
+
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.glitch::before {
+  left: 2px;
+  text-shadow: -1px 0 #ff00c1;
+  clip: rect(44px, 450px, 56px, 0);
+  animation: glitch-anim 5s infinite linear alternate-reverse;
+}
+
+.glitch::after {
+  left: -2px;
+  text-shadow: -1px 0 #00fff9;
+  clip: rect(44px, 450px, 56px, 0);
+  animation: glitch-anim2 5s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim {
+  0% {
+    clip: rect(10px, 9999px, 30px, 0);
+  }
+
+  20% {
+    clip: rect(80px, 9999px, 100px, 0);
+  }
+
+  40% {
+    clip: rect(10px, 9999px, 30px, 0);
+  }
+
+  60% {
+    clip: rect(60px, 9999px, 70px, 0);
+  }
+
+  80% {
+    clip: rect(20px, 9999px, 50px, 0);
+  }
+
+  100% {
+    clip: rect(90px, 9999px, 100px, 0);
+  }
+}
+
+@keyframes glitch-anim2 {
+  0% {
+    clip: rect(50px, 9999px, 60px, 0);
+  }
+
+  20% {
+    clip: rect(20px, 9999px, 30px, 0);
+  }
+
+  40% {
+    clip: rect(90px, 9999px, 100px, 0);
+  }
+
+  60% {
+    clip: rect(10px, 9999px, 40px, 0);
+  }
+
+  80% {
+    clip: rect(70px, 9999px, 90px, 0);
+  }
+
+  100% {
+    clip: rect(30px, 9999px, 40px, 0);
+  }
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(-100px) scale(0.5);
+    opacity: 0;
+  }
+}
+
+.animate-float-up {
+  animation: floatUp 1s ease-out forwards;
+}
