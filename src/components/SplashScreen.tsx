@@ -1,5 +1,6 @@
 
 import React, { useEffect, useState } from 'react';
+import clankerLogo from '../assets/clanker_button.png';
 
 interface SplashScreenProps {
     onFinished: () => void;
@@ -40,7 +41,7 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({ onFinished }) => {
                     <div className="absolute inset-0 rounded-full border-2 border-primary-purple/20 animate-spin-slow" />
                     <div className="absolute inset-2 rounded-full border border-purple-400/30 animate-spin-slow" style={{ animationDirection: 'reverse', animationDuration: '15s' }} />
                     <div className="absolute inset-3 rounded-full overflow-hidden shadow-[0_0_40px_rgba(124,58,237,0.3)]">
-                        <img src="/src/assets/clanker_button.png" alt="Clanker Tap" className="w-full h-full object-cover rounded-full" />
+                        <img src={clankerLogo} alt="Clanker Tap" className="w-full h-full object-cover rounded-full" />
                     </div>
                 </div>
 
