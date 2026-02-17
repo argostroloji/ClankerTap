@@ -52,6 +52,7 @@ export function usePlatform(): PlatformContext {
 
     useEffect(() => {
         async function init() {
+            console.log('Detecting platform:', platform);
             if (platform === 'telegram') {
                 // ---- Telegram init ----
                 if (WebApp.initDataUnsafe?.user) {
