@@ -5,7 +5,7 @@
         "signature": ""
     },
     "miniapp": {
-        "version": "1.1",
+        "version": "0.0.1",
         "name": "Clanker Tap",
         "iconUrl": "https://clanker-tap.vercel.app/icon.png",
         "homeUrl": "https://clanker-tap.vercel.app",
