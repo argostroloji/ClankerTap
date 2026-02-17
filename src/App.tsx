@@ -483,7 +483,6 @@ function App() {
         allTimeSnips={allTimeSnips}
         snips={snips}
         tapPower={tapPower}
-        upgrades={upgrades}
         userId={dbUser?.telegram_id}
       />
 

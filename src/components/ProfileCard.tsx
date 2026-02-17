@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { supabase, isSupabaseConfigured } from '../lib/supabaseClient';
 import { getProfileShareLink } from '../constants/gameData';
-import type { Upgrade } from '../types';
 import profileCardBg from '../assets/profile_card_bg.png';
 import { toPng } from 'html-to-image';
 
