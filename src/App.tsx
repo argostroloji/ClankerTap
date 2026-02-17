@@ -76,7 +76,10 @@ function App() {
               console.log('CHECKING LATE BINDING - RefID:', refId, 'Current User:', existingUser.telegram_id);
               if (!isNaN(refId) && refId !== existingUser.telegram_id) {
                 console.log('APPLYING LATE REFERRAL:', refId);
-                await supabase.from('users').update({ referred_by: refId }).eq('telegram_id', existingUser.telegram_id);
+                await supabase.rpc('bind_referral', {
+                  p_user_id: existingUser.telegram_id,
+                  p_ref_id: refId
+                });
                 existingUser.referred_by = refId;
               }
             }

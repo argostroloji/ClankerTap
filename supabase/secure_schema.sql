@@ -26,8 +26,8 @@ DROP POLICY IF EXISTS "Allow upgrade management" ON public.user_upgrades;
 CREATE POLICY "Public profiles are viewable by everyone." ON public.users FOR SELECT USING (true);
 CREATE POLICY "Public upgrades read" ON public.user_upgrades FOR SELECT USING (true);
 
--- Write Access: NONE for anon (only RPC functions can write)
--- This blocks anyone from doing `supabase.from('users').update(...)` from the console.
+-- Write Access: Allow INSERT for registration, block UPDATE (use RPC)
+CREATE POLICY "Allow registration" ON public.users FOR INSERT WITH CHECK (true);
 
 -- [3] RPC: SECURE GAME STATE SYNC
 -- This function handles energy and score updates with basic server-side validation.
@@ -116,5 +116,19 @@ BEGIN
             last_updated = NOW()
         WHERE user_id = p_user_id AND upgrade_type = p_upgrade_type;
     END IF;
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER;
+
+-- [5] RPC: SECURE LATE REFERRAL BINDING
+CREATE OR REPLACE FUNCTION public.bind_referral(
+    p_user_id BIGINT,
+    p_ref_id BIGINT
+)
+RETURNS void AS $$
+BEGIN
+    -- Only update if they don't have a referrer yet
+    UPDATE public.users 
+    SET referred_by = p_ref_id 
+    WHERE telegram_id = p_user_id AND referred_by IS NULL;
 END;
 $$ LANGUAGE plpgsql SECURITY DEFINER;
