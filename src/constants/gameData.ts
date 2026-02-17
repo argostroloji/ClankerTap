@@ -85,6 +85,20 @@ export const MISSIONS: Mission[] = [
         icon: '🐦'
     },
     {
+        id: 'twitter_follow_baseapp',
+        title: 'Follow @baseapp on X',
+        reward: 50000,
+        link: 'https://x.com/baseapp',
+        icon: '🐦'
+    },
+    {
+        id: 'twitter_follow_farcaster_xyz',
+        title: 'Follow @farcaster_xyz on X',
+        reward: 50000,
+        link: 'https://x.com/farcaster_xyz',
+        icon: '🟣'
+    },
+    {
         id: 'daily_login',
         title: 'Daily Login Bonus',
         reward: 10000,
