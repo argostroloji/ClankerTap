@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useTelegram } from '../hooks/useTelegram';
+import { usePlatform } from '../hooks/usePlatform';
 import { supabase } from '../lib/supabaseClient';
 
 interface ReferralProps {
@@ -9,7 +9,7 @@ interface ReferralProps {
 }
 
 export const Referral: React.FC<ReferralProps> = ({ isOpen, onClose, userId }) => {
-    const { WebApp } = useTelegram();
+    const { shareUrl, platform } = usePlatform();
     const [copied, setCopied] = useState(false);
     const [referralCount, setReferralCount] = useState<number>(0);
 
@@ -63,8 +63,12 @@ export const Referral: React.FC<ReferralProps> = ({ isOpen, onClose, userId }) =
     const handleInvite = () => {
         if (!userId) return;
         const text = `🎮 Join me in Clanker Tap! Tap, earn & upgrade your way to the top! 💰⚡`;
-        const url = `https://t.me/share/url?url=${encodeURIComponent(inviteLink)}&text=${encodeURIComponent(text)}`;
-        WebApp.openTelegramLink(url);
+        if (platform === 'telegram') {
+            const url = `https://t.me/share/url?url=${encodeURIComponent(inviteLink)}&text=${encodeURIComponent(text)}`;
+            shareUrl(url, text);
+        } else {
+            shareUrl(inviteLink, text);
+        }
     };
 
     console.log('Generated Invite Link:', inviteLink);

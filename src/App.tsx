@@ -1,6 +1,6 @@
 
 import { useEffect, useState, useRef, useCallback } from 'react';
-import { useTelegram } from './hooks/useTelegram';
+import { usePlatform } from './hooks/usePlatform';
 import { useGameState } from './hooks/useGameState';
 import { supabase, isSupabaseConfigured } from './lib/supabaseClient';
 import type { User, UpgradeType } from './types';
@@ -16,7 +16,7 @@ import { ProfileCard } from './components/ProfileCard';
 import { playSound } from './lib/audio';
 
 function App() {
-  const { user, hapticFeedback, WebApp } = useTelegram();
+  const { user, hapticFeedback, getStartParam } = usePlatform();
   const [dbUser, setDbUser] = useState<User | null>(null);
   const [scoreFlash, setScoreFlash] = useState(false);
   const [showSplash, setShowSplash] = useState(true);
@@ -70,7 +70,7 @@ function App() {
         if (existingUser) {
           // LATE REFERRAL BINDING: If user exists but has no referrer, check start_param
           if (!existingUser.referred_by) {
-            const startParam = WebApp.initDataUnsafe.start_param;
+            const startParam = getStartParam();
             if (startParam && startParam.startsWith('ref_')) {
               const refId = parseInt(startParam.replace('ref_', ''), 10);
               console.log('CHECKING LATE BINDING - RefID:', refId, 'Current User:', existingUser.telegram_id);
@@ -88,7 +88,7 @@ function App() {
         } else {
           // Create new user
           let referredBy: number | null = null;
-          const startParam = WebApp.initDataUnsafe.start_param;
+          const startParam = getStartParam();
           if (startParam && startParam.startsWith('ref_')) {
             const refId = parseInt(startParam.replace('ref_', ''), 10);
             if (!isNaN(refId) && refId !== user.id) {

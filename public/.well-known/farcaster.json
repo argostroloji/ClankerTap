@@ -1,0 +1,35 @@
+{
+    "accountAssociation": {
+        "header": "",
+        "payload": "",
+        "signature": ""
+    },
+    "miniapp": {
+        "version": "1",
+        "name": "BagsTap",
+        "iconUrl": "https://clanker-tap.vercel.app/icon.png",
+        "homeUrl": "https://clanker-tap.vercel.app",
+        "splashImageUrl": "https://clanker-tap.vercel.app/splash.png",
+        "splashBackgroundColor": "#0a0014",
+        "subtitle": "Tap to Earn",
+        "description": "Tap, upgrade, and compete on the leaderboard! Earn rewards by tapping, unlock upgrades, and climb the ranks.",
+        "screenshotUrls": [
+            "https://clanker-tap.vercel.app/screenshots/screenshot1.png",
+            "https://clanker-tap.vercel.app/screenshots/screenshot2.png",
+            "https://clanker-tap.vercel.app/screenshots/screenshot3.png"
+        ],
+        "primaryCategory": "games",
+        "tags": [
+            "tap",
+            "earn",
+            "game",
+            "base",
+            "clanker"
+        ],
+        "heroImageUrl": "https://clanker-tap.vercel.app/og.png",
+        "tagline": "Tap to Earn",
+        "ogTitle": "BagsTap — Tap to Earn",
+        "ogDescription": "Tap, upgrade, and compete on the leaderboard!",
+        "ogImageUrl": "https://clanker-tap.vercel.app/og.png"
+    }
+}
