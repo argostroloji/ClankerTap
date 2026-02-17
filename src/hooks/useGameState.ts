@@ -180,6 +180,7 @@ export function useGameState({ user }: UseGameStateProps) {
         energy,
         maxEnergy,
         snips,
+        allTimeSnips,
         tapPower,
         passiveIncome,
         upgrades,

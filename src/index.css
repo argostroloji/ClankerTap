@@ -27,133 +27,424 @@ body {
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #10101a;
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #333;
+  background: rgba(124, 58, 237, 0.3);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #ff5f1f;
+  background: rgba(124, 58, 237, 0.6);
 }
 
-.glitch {
-  position: relative;
-}
+/* Glitch effect removed — unused and used deprecated clip property */
 
-.glitch::before,
-.glitch::after {
-  content: attr(data-text);
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.glitch::before {
-  left: 2px;
-  text-shadow: -1px 0 #ff00c1;
-  clip: rect(44px, 450px, 56px, 0);
-  animation: glitch-anim 5s infinite linear alternate-reverse;
-}
-
-.glitch::after {
-  left: -2px;
-  text-shadow: -1px 0 #00fff9;
-  clip: rect(44px, 450px, 56px, 0);
-  animation: glitch-anim2 5s infinite linear alternate-reverse;
-}
-
-@keyframes glitch-anim {
+/* ============================================
+   COIN BURST PARTICLES
+   ============================================ */
+@keyframes coinBurst {
   0% {
-    clip: rect(10px, 9999px, 30px, 0);
+    opacity: 1;
+    transform: translate(0, 0) scale(0.3) rotate(0deg);
   }
 
-  20% {
-    clip: rect(80px, 9999px, 100px, 0);
-  }
-
-  40% {
-    clip: rect(10px, 9999px, 30px, 0);
-  }
-
-  60% {
-    clip: rect(60px, 9999px, 70px, 0);
-  }
-
-  80% {
-    clip: rect(20px, 9999px, 50px, 0);
+  50% {
+    opacity: 0.9;
+    transform: translate(var(--tx, 30px), var(--ty, -30px)) scale(1.1) rotate(180deg);
   }
 
   100% {
-    clip: rect(90px, 9999px, 100px, 0);
+    opacity: 0;
+    transform: translate(var(--tx, 60px), var(--ty, -60px)) scale(0.5) rotate(360deg);
   }
 }
 
-@keyframes glitch-anim2 {
-  0% {
-    clip: rect(50px, 9999px, 60px, 0);
-  }
 
-  20% {
-    clip: rect(20px, 9999px, 30px, 0);
-  }
-
-  40% {
-    clip: rect(90px, 9999px, 100px, 0);
-  }
-
-  60% {
-    clip: rect(10px, 9999px, 40px, 0);
-  }
-
-  80% {
-    clip: rect(70px, 9999px, 90px, 0);
-  }
-
-  100% {
-    clip: rect(30px, 9999px, 40px, 0);
-  }
-}
-
+/* ============================================
+   TAP FLOAT-UP PARTICLES
+   ============================================ */
 @keyframes floatUp {
   0% {
     transform: translateY(0) scale(1);
     opacity: 1;
   }
 
+  50% {
+    opacity: 0.8;
+  }
+
   100% {
-    transform: translateY(-100px) scale(0.5);
+    transform: translateY(-120px) scale(0.4);
     opacity: 0;
   }
 }
 
 .animate-float-up {
-  animation: floatUp 1s ease-out forwards;
+  animation: floatUp 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
 }
 
+/* ============================================
+   SCREEN SHAKE (COMBO)
+   ============================================ */
+@keyframes screenShake {
+
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+
+  10% {
+    transform: translate(-3px, -2px);
+  }
+
+  20% {
+    transform: translate(4px, 1px);
+  }
+
+  30% {
+    transform: translate(-2px, 3px);
+  }
+
+  40% {
+    transform: translate(3px, -3px);
+  }
+
+  50% {
+    transform: translate(-4px, 2px);
+  }
+
+  60% {
+    transform: translate(2px, -1px);
+  }
+
+  70% {
+    transform: translate(-3px, 3px);
+  }
+
+  80% {
+    transform: translate(4px, -2px);
+  }
+
+  90% {
+    transform: translate(-1px, 1px);
+  }
+}
+
+.animate-screen-shake {
+  animation: screenShake 0.5s ease-in-out;
+}
+
+/* ============================================
+   SHAKE ANIMATION
+   ============================================ */
 @keyframes shake {
-  0% { transform: translate(1px, 1px) rotate(0deg); }
-  10% { transform: translate(-1px, -2px) rotate(-1deg); }
-  20% { transform: translate(-3px, 0px) rotate(1deg); }
-  30% { transform: translate(3px, 2px) rotate(0deg); }
-  40% { transform: translate(1px, -1px) rotate(1deg); }
-  50% { transform: translate(-1px, 2px) rotate(-1deg); }
-  60% { transform: translate(-3px, 1px) rotate(0deg); }
-  70% { transform: translate(3px, 1px) rotate(-1deg); }
-  80% { transform: translate(-1px, -1px) rotate(1deg); }
-  90% { transform: translate(1px, 2px) rotate(0deg); }
-  100% { transform: translate(1px, -2px) rotate(-1deg); }
+  0% {
+    transform: translate(1px, 1px) rotate(0deg);
+  }
+
+  10% {
+    transform: translate(-1px, -2px) rotate(-1deg);
+  }
+
+  20% {
+    transform: translate(-3px, 0px) rotate(1deg);
+  }
+
+  30% {
+    transform: translate(3px, 2px) rotate(0deg);
+  }
+
+  40% {
+    transform: translate(1px, -1px) rotate(1deg);
+  }
+
+  50% {
+    transform: translate(-1px, 2px) rotate(-1deg);
+  }
+
+  60% {
+    transform: translate(-3px, 1px) rotate(0deg);
+  }
+
+  70% {
+    transform: translate(3px, 1px) rotate(-1deg);
+  }
+
+  80% {
+    transform: translate(-1px, -1px) rotate(1deg);
+  }
+
+  90% {
+    transform: translate(1px, 2px) rotate(0deg);
+  }
+
+  100% {
+    transform: translate(1px, -2px) rotate(-1deg);
+  }
 }
 
 .animate-shake {
-  animation: shake 0.5s;
+  animation: shake 0.3s;
   animation-iteration-count: 1;
+}
+
+/* ============================================
+   RIPPLE EFFECT — Tap explosion ring
+   ============================================ */
+@keyframes ripple {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0.6;
+    border-width: 4px;
+  }
+
+  100% {
+    transform: translate(-50%, -50%) scale(3);
+    opacity: 0;
+    border-width: 1px;
+  }
+}
+
+.animate-ripple {
+  animation: ripple 0.6s ease-out forwards;
+}
+
+/* ============================================
+   SPARK BURST — Small particles from tap
+   ============================================ */
+@keyframes sparkBurst {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+.animate-spark {
+  animation: sparkBurst 0.5s ease-out forwards;
+}
+
+/* ============================================
+   SHIMMER — Energy bar sweep
+   ============================================ */
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(400%);
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 2.5s ease-in-out infinite;
+}
+
+/* ============================================
+   GLOW PULSE — Button ambient glow
+   ============================================ */
+@keyframes glowPulse {
+
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(124, 58, 237, 0.3), 0 0 40px rgba(124, 58, 237, 0.1);
+  }
+
+  50% {
+    box-shadow: 0 0 30px rgba(124, 58, 237, 0.5), 0 0 60px rgba(124, 58, 237, 0.2);
+  }
+}
+
+.animate-glow-pulse {
+  animation: glowPulse 3s ease-in-out infinite;
+}
+
+/* ============================================
+   SPIN SLOW — Decorative rotation
+   ============================================ */
+@keyframes spinSlow {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spin-slow {
+  animation: spinSlow 20s linear infinite;
+}
+
+/* ============================================
+   AMBIENT ORB FLOAT — Background orbs
+   ============================================ */
+@keyframes orbFloat {
+
+  0%,
+  100% {
+    transform: translateY(0px) scale(1);
+    opacity: 0.15;
+  }
+
+  50% {
+    transform: translateY(-30px) scale(1.1);
+    opacity: 0.25;
+  }
+}
+
+.animate-orb-float {
+  animation: orbFloat 8s ease-in-out infinite;
+}
+
+/* ============================================
+   SLIDE UP — Modal entrance
+   ============================================ */
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-up {
+  animation: slideUp 0.3s ease-out forwards;
+}
+
+/* ============================================
+   FADE IN
+   ============================================ */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.2s ease-out forwards;
+}
+
+/* ============================================
+   SCORE FLASH — Score increase glow
+   ============================================ */
+@keyframes scoreFlash {
+  0% {
+    text-shadow: 0 0 20px rgba(167, 139, 250, 0.8), 0 0 40px rgba(124, 58, 237, 0.6);
+    transform: scale(1.1);
+  }
+
+  100% {
+    text-shadow: none;
+    transform: scale(1);
+  }
+}
+
+.animate-score-flash {
+  animation: scoreFlash 0.4s ease-out;
+}
+
+/* ============================================
+   CIRCUIT BOARD PATTERN — Subtle background
+   ============================================ */
+.circuit-bg {
+  background-image:
+    radial-gradient(circle at 25% 25%, rgba(124, 58, 237, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 75% 75%, rgba(167, 139, 250, 0.03) 0%, transparent 50%);
+}
+
+.circuit-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(124, 58, 237, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(124, 58, 237, 0.05) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+  -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ============================================
+   GLASSMORPHISM UTILITIES
+   ============================================ */
+.glass {
+  background: rgba(17, 6, 31, 0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(124, 58, 237, 0.15);
+}
+
+.glass-hover:hover {
+  background: rgba(124, 58, 237, 0.1);
+  border-color: rgba(124, 58, 237, 0.3);
+}
+
+/* ============================================
+   LUCKY TAP ANIMATIONS
+   ============================================ */
+@keyframes luckyPop {
+  0% {
+    transform: scale(0.3);
+    opacity: 0;
+  }
+
+  50% {
+    transform: scale(1.15);
+    opacity: 1;
+  }
+
+  70% {
+    transform: scale(0.95);
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.animate-lucky-pop {
+  animation: luckyPop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes luckyStar {
+  0% {
+    opacity: 0;
+    transform: rotate(var(--r, 0deg)) translateY(-30px) scale(0);
+  }
+
+  50% {
+    opacity: 1;
+    transform: rotate(var(--r, 0deg)) translateY(-80px) scale(1.2);
+  }
+
+  100% {
+    opacity: 0;
+    transform: rotate(var(--r, 0deg)) translateY(-110px) scale(0.5);
+  }
+}
+
+.animate-lucky-star {
+  animation: luckyStar 1.5s ease-out forwards;
 }

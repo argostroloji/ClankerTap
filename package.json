@@ -1,5 +1,5 @@
 {
-  "name": "bags-tap",
+  "name": "clanker-tap",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -12,6 +12,7 @@
   "dependencies": {
     "@supabase/supabase-js": "^2.95.3",
     "@twa-dev/sdk": "^8.0.2",
+    "html-to-image": "^1.11.13",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
   },
