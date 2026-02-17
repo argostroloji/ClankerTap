@@ -89,15 +89,12 @@ export function useGameState({ user }: UseGameStateProps) {
 
         const saveInterval = setInterval(async () => {
             const current = stateRef.current;
-            const { error } = await supabase
-                .from('users')
-                .update({
-                    energy_current: Math.floor(current.energy),
-                    total_snips: Math.floor(current.snips),
-                    all_time_snips: Math.floor(current.allTimeSnips),
-                    last_active: new Date().toISOString(),
-                })
-                .eq('telegram_id', user.telegram_id);
+            const { error } = await supabase.rpc('sync_game_state', {
+                p_telegram_id: user.telegram_id,
+                p_total_snips: Math.floor(current.snips),
+                p_all_time_snips: Math.floor(current.allTimeSnips),
+                p_energy_current: Math.floor(current.energy)
+            });
 
             if (error) console.error('Auto-save error:', error);
         }, 10000);
@@ -150,15 +147,11 @@ export function useGameState({ user }: UseGameStateProps) {
                 return;
             }
 
-            const { error } = await supabase
-                .from('user_upgrades')
-                .upsert({
-                    user_id: user.telegram_id,
-                    upgrade_type: type,
-                    current_level: nextLevel
-                }, { onConflict: 'user_id, upgrade_type' })
-                .select()
-                .single();
+            const { error } = await supabase.rpc('purchase_upgrade', {
+                p_user_id: user.telegram_id,
+                p_upgrade_type: type,
+                p_cost: cost
+            });
 
             if (error) {
                 console.error('Upgrade failed:', error);
@@ -166,7 +159,7 @@ export function useGameState({ user }: UseGameStateProps) {
                 setUpgrades(prev => {
                     const filtered = prev.filter(u => u.upgrade_type !== type);
                     return [...filtered, {
-                        id: currentUpgrade?.id || 'temp',
+                        id: currentUpgrade?.id || 'new-' + Date.now(),
                         user_id: user.telegram_id,
                         upgrade_type: type,
                         current_level: nextLevel
