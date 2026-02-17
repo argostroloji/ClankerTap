@@ -6,7 +6,7 @@
     },
     "miniapp": {
         "version": "1",
-        "name": "BagsTap",
+        "name": "Clanker Tap",
         "iconUrl": "https://clanker-tap.vercel.app/icon.png",
         "homeUrl": "https://clanker-tap.vercel.app",
         "splashImageUrl": "https://clanker-tap.vercel.app/splash.png",
@@ -28,7 +28,7 @@
         ],
         "heroImageUrl": "https://clanker-tap.vercel.app/og.png",
         "tagline": "Tap to Earn",
-        "ogTitle": "BagsTap — Tap to Earn",
+        "ogTitle": "Clanker Tap — Tap to Earn",
         "ogDescription": "Tap, upgrade, and compete on the leaderboard!",
         "ogImageUrl": "https://clanker-tap.vercel.app/og.png"
     }
