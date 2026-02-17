@@ -61,7 +61,7 @@ export function usePlatform(): PlatformContext {
                         username: tgUser.username || tgUser.first_name || `user_${tgUser.id}`,
                         first_name: tgUser.first_name,
                         last_name: tgUser.last_name,
-                        photo_url: (tgUser as Record<string, unknown>).photo_url as string | undefined,
+                        photo_url: (tgUser as unknown as { photo_url?: string }).photo_url,
                     });
                     WebApp.ready();
                     WebApp.expand();
@@ -70,7 +70,9 @@ export function usePlatform(): PlatformContext {
             } else if (platform === 'farcaster') {
                 // ---- Farcaster / Base init ----
                 try {
-                    const context = await sdk.actions.ready();
+                    await sdk.actions.ready();
+                    // Access context separately after ready()
+                    const context = await sdk.context;
                     if (context?.user) {
                         setUser({
                             id: context.user.fid,
@@ -81,7 +83,6 @@ export function usePlatform(): PlatformContext {
                     }
                 } catch (err) {
                     console.warn('Farcaster SDK ready() failed, falling back:', err);
-                    // Still try to call ready to dismiss splash
                     try { await sdk.actions.ready(); } catch { /* noop */ }
                 }
                 setIsReady(true);
