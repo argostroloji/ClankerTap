@@ -61,7 +61,7 @@ function App() {
 
       // 2. TELEGRAM USER CHECK
       if (user) {
-        const { data: existingUser, error } = await supabase
+        const { data: existingUser } = await supabase
           .from('users')
           .select('*')
           .eq('telegram_id', user.id)

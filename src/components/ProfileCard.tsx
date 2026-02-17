@@ -13,7 +13,6 @@ interface ProfileCardProps {
     allTimeSnips: number;
     snips: number;
     tapPower: number;
-    upgrades: Upgrade[];
     userId?: number;
 }
 
@@ -25,7 +24,6 @@ export const ProfileCard: React.FC<ProfileCardProps> = ({
     allTimeSnips,
     snips,
     tapPower,
-    upgrades,
     userId,
 }) => {
     const [rank, setRank] = useState<number | null>(null);
@@ -93,11 +91,6 @@ export const ProfileCard: React.FC<ProfileCardProps> = ({
     }, [username]);
 
     if (!isOpen) return null;
-
-    const getUpgradeLevel = (type: string) => {
-        const u = upgrades.find(u => u.upgrade_type === type);
-        return u?.current_level || 0;
-    };
 
     const handleTwitterShare = () => {
         if (rank) {
